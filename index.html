@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="sk"> <!-- Definuje jazyk stránky na slovenčinu -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Nastavuje znaková sadu na UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Umožňuje responzívny dizajn -->
+    <title>Kalkulačka mzdy</title> <!-- Názov stránky v prehliadači -->
+    <link rel="stylesheet" href="style.css"> <!-- Odkaz na externý CSS súbor -->
+
+    <style>
+        /* Štýly pre hlavný kontajner */
+        .container {
+            display: flex;
+            /* Usporiadanie prvkov vedľa seba */
+            justify-content: space-between;
+            /* Rozdelenie priestoru medzi prvkami */
+            align-items: flex-start;
+            /* Zarovnanie prvkov hore */
+            position: relative;
+        }
+
+        /* Ľavá sekcia s formulárom a tabuľkou */
+        .left-content {
+            flex: 1;
+            /* Rozloženie obsahu na celú dostupnú šírku */
+        }
+
+        /* Kontajner pre graf */
+        .chart-container {
+            width: 1400px;
+            /* Nastavenie šírky */
+            height: 400px;
+            /* Nastavenie výšky */
+            margin-top: 120px;
+            /* Odsadenie odhora */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"> <!-- Hlavný kontajner, ktorý obsahuje formulár a graf -->
+        <div class="left-content"> <!-- Ľavá sekcia s formulárom a tabuľkou -->
+            <p><strong>Vyber typ mzdy:</strong></p> <!-- Nadpis formulára -->
+
+            <!-- Výber typu mzdy pomocou rádio tlačidiel -->
+            <label><input type="radio" name="typMzdy" value="hruba" checked> Hrubá mzda</label>
+            <label><input type="radio" name="typMzdy" value="cista"> Čistá mzda</label>
+            <label><input type="radio" name="typMzdy" value="superhruba"> Superhrubá mzda</label>
+
+            <br><br>
+
+            <!-- Pole na zadanie hodnoty mzdy -->
+            <label for="hodnotaMzdy">Zadaj hodnotu (€):</label>
+            <input type="number" id="hodnotaMzdy" min="0" placeholder="Zadaj sumu">
+
+            <br><br>
+
+            <!-- Tlačidlo na spustenie výpočtu -->
+            <button id="vypocetBtn">Výpočet</button>
+
+            <br><br>
+
+            <!-- Tabuľka s výsledkami odvodov a mzdy -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Typ odvodu</th> <!-- Hlavička tabuľky -->
+                        <th>Zamestnanec</th>
+                        <th>Zamestnávateľ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Zdravotné poistenie</td>
+                        <td id="zdravotneZamestnanec">0 €</td> <!-- Hodnota pre zamestnanca -->
+                        <td id="zdravotneZamestnavatel">0 €</td> <!-- Hodnota pre zamestnávateľa -->
+                    </tr>
+                    <tr>
+                        <td>Sociálne poistenie</td>
+                        <td id="socialneZamestnanec">0 €</td>
+                        <td id="socialneZamestnavatel">0 €</td>
+                    </tr>
+                    <tr>
+                        <td>Daň z príjmu</td>
+                        <td id="danZamestnanec">0 €</td>
+                        <td>-</td> <!-- Zamestnávateľ neplatí daň z príjmu -->
+                    </tr>
+                    <tr>
+                        <td>Celkové náklady</td>
+                        <td id="cistaMzda">0 €</td> <!-- Čistá mzda zamestnanca -->
+                        <td id="superHrubaMzda">0 €</td> <!-- Superhrubá mzda zamestnávateľa -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sekcia s grafom -->
+        <div class="chart-container">
+            <canvas id="mzdaChart"></canvas> <!-- Plátno pre vykreslenie grafu -->
+        </div>
+    </div>
+
+    <!-- Načítanie knižnice Chart.js na vykreslenie grafu -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Načítanie externého JavaScript súboru s logikou výpočtu -->
+    <script src="script.js"></script>
+</body>
+
+</html>
